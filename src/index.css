@@ -1,1 +1,6 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+/* para colocar cores personalizadas e chamar pelo nome que escolhi */
+/* @theme {
+  --color-verde: #7cffb0;
+} */
