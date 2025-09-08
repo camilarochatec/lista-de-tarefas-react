@@ -65,9 +65,9 @@ function Gaveta({ isOpen, onClose, mode, tarefaParaEditar, onTasksUpdate }) {
                         <box-icon name='x' class="cursor-pointer" onClick={onClose}></box-icon>
                     </h3>
                     <label htmlFor="titulo" className="block mb-1 mt-4 font-bold">Titulo</label>
-                    <input name="titulo" className="w-full h-[40px] mb-3 pl-3 border-2 border-slate-300 focus:border-black rounded dark:text-black" type="text" placeholder="Digite um titulo" required />
-                    <label htmlFor="descricao" className="block mb-1 font-bold">Descrição</label>
-                    <textarea name="descricao" className="w-full h-[120px] mb-3 p-3 border-2 border-slate-300 focus:border-black rounded dark:text-black" required></textarea>
+                    <input name="titulo" className="w-full h-[40px] mb-3 pl-3 border-2 border-slate-300 focus:border-black rounded dark:text-white" type="text" placeholder="Digite um titulo" required />
+                    <label htmlFor="descricao" className="block mb-1 font-bold dark:text-white">Descrição</label>
+                    <textarea name="descricao" className="w-full h-[120px] mb-3 p-3 border-2 border-slate-300 focus:border-black rounded dark:text-white" required></textarea>
                     <button type="submit" className="w-full h-[40px] rounded bg-black dark:bg-slate-400 text-white dark:text-black text-center font-bold cursor-pointer">Criar</button>
                 </form>
 
@@ -78,9 +78,9 @@ function Gaveta({ isOpen, onClose, mode, tarefaParaEditar, onTasksUpdate }) {
                         <box-icon name='x' class="cursor-pointer" onClick={onClose}></box-icon>
                     </h3>
                     <label htmlFor="titulo" className="block mb-1 mt-4 font-bold">Título</label>
-                    <input name="titulo" className="w-full h-[40px] mb-3 pl-3 border-2 border-slate-300 focus:border-black rounded dark:text-black" type="text" placeholder="Digite um título" defaultValue={tarefaParaEditar?.titulo} required />
-                    <label htmlFor="descricao" className="block mb-1 font-bold">Descrição</label>
-                    <textarea name="descricao" className="w-full h-[120px] mb-3 p-3 border-2 border-slate-300 focus:border-black rounded dark:text-black" placeholder="Digite aqui" defaultValue={tarefaParaEditar?.descricao} required></textarea>
+                    <input name="titulo" className="w-full h-[40px] mb-3 pl-3 border-2 border-slate-300 focus:border-black rounded dark:text-white" type="text" placeholder="Digite um título" defaultValue={tarefaParaEditar?.titulo} required />
+                    <label htmlFor="descricao" className="block mb-1 font-bold dark:text-white">Descrição</label>
+                    <textarea name="descricao" className="w-full h-[120px] mb-3 p-3 border-2 border-slate-300 focus:border-black rounded dark:text-white" placeholder="Digite aqui" defaultValue={tarefaParaEditar?.descricao} required></textarea>
                     <button type="submit" className="w-full h-[40px] rounded bg-black dark:bg-slate-400 text-white dark:text-black text-center font-bold cursor-pointer">Editar</button>
                 </form>
             </div>

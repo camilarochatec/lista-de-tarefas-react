@@ -64,8 +64,8 @@ const Header = ({ pesquisa, setDarkMode }) => {
 
 export default Header;
 
-// filepath: c:\Users\construtora\Documents\projeto-tarefas-react\tailwind.config.js
-module.exports = {
-  darkMode: 'class',
-  // ...outros configs...
-}
+// // filepath: c:\Users\construtora\Documents\projeto-tarefas-react\tailwind.config.js
+// module.exports = {
+//   darkMode: 'class',
+//   // ...outros configs...
+// }

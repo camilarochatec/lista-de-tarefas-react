@@ -100,4 +100,4 @@ const Card = ({ tasks, onTasksUpdate }) => {
     );
 }
 
-export default Header;
+export default Card;
