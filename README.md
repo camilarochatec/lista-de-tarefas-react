@@ -1,5 +1,3 @@
 # React + Vite
-npx json-server ./api/api.json --port 8000
-para iniciar o api
+para ativar o API: npx json-server ./api/api.json --port 8000
 
-quando usar o boxicon no react usar 

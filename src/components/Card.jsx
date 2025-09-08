@@ -1,6 +1,9 @@
-import { useState, useRef } from 'react';
+// src/components/Card.jsx
 
-// Componente para um único card de tarefa
+import { useState } from 'react';
+import Gaveta from './Gaveta'; // 👈 1. Importe o novo componente
+
+// Componente para um único card de tarefa (permanece igual)
 function Tarefa({ tarefa, onEdit, onDelete }) {
     const formatarData = (data) => {
         if (!data) return '';
@@ -25,18 +28,14 @@ function Tarefa({ tarefa, onEdit, onDelete }) {
     );
 }
 
-// Componente principal que contém toda a lógica da lista e da gaveta
+// Componente principal que agora gerencia o estado da gaveta
 const Card = ({ tasks, onTasksUpdate }) => {
-    // ESTADO: Controla apenas o que é relevante para este componente
+    // ESTADO: Controla a visibilidade e o modo da gaveta
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-    const [formMode, setFormMode] = useState('create');
+    const [formMode, setFormMode] = useState('create'); // 'create' ou 'edit'
     const [tarefaEmEdicao, setTarefaEmEdicao] = useState(null);
 
-    // REFS: Para acessar os formulários
-    const formCriarRef = useRef(null);
-    const formEditarRef = useRef(null);
-
-    // Funções para controlar a gaveta (abrir/fechar)
+    // Funções para controlar a gaveta
     const handleAbrirGaveta = (tarefaParaEditar = null) => {
         if (tarefaParaEditar) {
             setFormMode('edit');
@@ -52,47 +51,13 @@ const Card = ({ tasks, onTasksUpdate }) => {
         setIsDrawerOpen(false);
     };
 
-    // Função para criar tarefa
-    const handleCriarTarefa = async (event) => {
-        event.preventDefault();
-        const dados = new FormData(formCriarRef.current);
-        const novaTarefa = Object.fromEntries(dados.entries());
-        novaTarefa.data = new Date().toISOString().split('T')[0];
-
-        await fetch("http://localhost:8000/tarefas", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(novaTarefa)
-        });
-
-        onTasksUpdate(); // Avisa o App para buscar as tarefas novamente
-        handleFecharGaveta();
-    };
-
-    // Função para editar tarefa
-    const handleEditarTarefa = async (event) => {
-        event.preventDefault();
-        const dados = new FormData(formEditarRef.current);
-        const tarefaAtualizada = Object.fromEntries(dados.entries());
-        tarefaAtualizada.data = tarefaEmEdicao.data;
-
-        await fetch(`http://localhost:8000/tarefas/${tarefaEmEdicao.id}`, {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(tarefaAtualizada)
-        });
-
-        onTasksUpdate(); // Avisa o App para buscar as tarefas novamente
-        handleFecharGaveta();
-    };
-
-    // Função para deletar tarefa
+    // Função para deletar tarefa (continua aqui, pois não pertence à gaveta)
     const handleDeletarTarefa = async (idDaTarefa) => {
         if (window.confirm("Deseja realmente apagar este item?")) {
             await fetch(`http://localhost:8000/tarefas/${idDaTarefa}`, {
                 method: "DELETE",
             });
-            onTasksUpdate(); // Avisa o App para buscar as tarefas novamente
+            onTasksUpdate();
         }
     };
 
@@ -123,39 +88,14 @@ const Card = ({ tasks, onTasksUpdate }) => {
                 </div>
             </div>
 
-            {/* Gaveta (Drawer) e Sombra (Overlay) */}
-            <div
-                onClick={handleFecharGaveta}
-                className={`w-full h-screen bg-black/90 fixed top-0 left-0 duration-150 transition-opacity ${isDrawerOpen ? 'visible opacity-100' : 'invisible opacity-0'}`}>
-            </div>
-            <div
-                className={`w-[90%] sm:w-[400px] h-screen bg-white dark:bg-slate-800 dark:text-white p-4 fixed top-0 right-0 duration-300 ease-in-out transform transition-transform ${isDrawerOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-
-                {/* Formulários de Criar e Editar */}
-                <form ref={formCriarRef} onSubmit={handleCriarTarefa} className={formMode === 'create' ? '' : 'hidden'}>
-                    <h3 className="flex justify-between items-center text-[20px] font-bold">
-                        Cadastrar
-                        <box-icon name='x' class="cursor-pointer" onClick={handleFecharGaveta}></box-icon>
-                    </h3>
-                    <label htmlFor="titulo" className="block mb-1 mt-4 font-bold">Titulo</label>
-                    <input name="titulo" className="w-full h-[40px] mb-3 pl-3 border-2 border-slate-300 focus:border-black rounded dark:text-black" type="text" placeholder="Digite um titulo" required />
-                    <label htmlFor="descricao" className="block mb-1 font-bold">Descrição</label>
-                    <textarea name="descricao" className="w-full h-[120px] mb-3 p-3 border-2 border-slate-300 focus:border-black rounded dark:text-black" required></textarea>
-                    <button type="submit" className="w-full h-[40px] rounded bg-black dark:bg-slate-400 text-white dark:text-black text-center font-bold cursor-pointer">Criar</button>
-                </form>
-
-                <form ref={formEditarRef} onSubmit={handleEditarTarefa} className={formMode === 'edit' ? '' : 'hidden'}>
-                    <h3 className="flex justify-between items-center text-[20px] font-bold">
-                        Atualizar
-                        <box-icon name='x' class="cursor-pointer" onClick={handleFecharGaveta}></box-icon>
-                    </h3>
-                    <label htmlFor="edit-titulo" className="block mb-1 mt-4 font-bold">Título</label>
-                    <input name="titulo" className="w-full h-[40px] mb-3 pl-3 border-2 border-slate-300 focus:border-black rounded dark:text-black" type="text" placeholder="Digite um título" defaultValue={tarefaEmEdicao?.titulo} required />
-                    <label htmlFor="edit-descricao" className="block mb-1 font-bold">Descrição</label>
-                    <textarea name="descricao" className="w-full h-[120px] mb-3 p-3 border-2 border-slate-300 focus:border-black rounded dark:text-black" placeholder="Digite aqui" defaultValue={tarefaEmEdicao?.descricao} required></textarea>
-                    <button type="submit" className="w-full h-[40px] rounded bg-black dark:bg-slate-400 text-white dark:text-black text-center font-bold cursor-pointer">Editar</button>
-                </form>
-            </div>
+            {/* 2. Renderize o componente Gaveta e passe os estados e funções como props */}
+            <Gaveta
+                isOpen={isDrawerOpen}
+                onClose={handleFecharGaveta}
+                mode={formMode}
+                tarefaParaEditar={tarefaEmEdicao}
+                onTasksUpdate={onTasksUpdate}
+            />
         </>
     );
 }

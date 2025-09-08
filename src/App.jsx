@@ -2,10 +2,12 @@ import { useState, useEffect, useCallback } from 'react';
 import Card from './components/Card';
 import Header from './components/Header';
 
+
 function App() {
+  // Estados principais que controlam toda a aplicação
+  const [allTasks, setAllTasks] = useState([]); // Lista original de tarefas
+  const [searchTerm, setSearchTerm] = useState(''); // Termo da pesquisa
   const [darkMode, setDarkMode] = useState(false);
-  const [allTasks, setAllTasks] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
 
   const fetchTasks = useCallback(async () => {
     try {
@@ -34,12 +36,12 @@ function App() {
   );
 
   return (
-    <div className={darkMode ? "dark" : ""}>
-      <div className="bg-slate-100 dark:bg-slate-900 min-h-screen">
-        <Header
-          setDarkMode={setDarkMode}
-          onSearch={setSearchTerm}
-        />
+    <div className="bg-slate-100 dark:bg-slate-900 min-h-screen">
+      <Header
+        pesquisa={setSearchTerm}
+        setDarkMode={setDarkMode}
+      />
+
         <main>
           <Card
             tasks={filteredTasks}
@@ -47,7 +49,7 @@ function App() {
           />
         </main>
       </div>
-    </div>
+    
   );
 }
 
