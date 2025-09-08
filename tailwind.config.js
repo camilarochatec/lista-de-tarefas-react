@@ -1,7 +1,7 @@
 document.documentElement.classList.add('dark');
 
 module.exports = {
-  darkMode: 'class', // ESSENCIAL!
+  darkMode: 'class',
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
     // outros caminhos...
@@ -11,3 +11,5 @@ module.exports = {
   },
   plugins: [],
 }
+
+export default Header;

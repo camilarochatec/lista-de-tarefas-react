@@ -109,12 +109,12 @@ const Card = ({ tasks, onTasksUpdate }) => {
                         Nova tarefa
                     </button>
                 </div>
-                
+
                 {/* Grid das listas de tarefas criadas */}
                 <div id="lista-de-tarefas" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
                     {tasks.map(tarefa => (
-                        <Tarefa 
-                            key={tarefa.id} 
+                        <Tarefa
+                            key={tarefa.id}
                             tarefa={tarefa}
                             onEdit={handleAbrirGaveta}
                             onDelete={handleDeletarTarefa}
@@ -130,7 +130,7 @@ const Card = ({ tasks, onTasksUpdate }) => {
             </div>
             <div
                 className={`w-[90%] sm:w-[400px] h-screen bg-white dark:bg-slate-800 dark:text-white p-4 fixed top-0 right-0 duration-300 ease-in-out transform transition-transform ${isDrawerOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-                
+
                 {/* Formulários de Criar e Editar */}
                 <form ref={formCriarRef} onSubmit={handleCriarTarefa} className={formMode === 'create' ? '' : 'hidden'}>
                     <h3 className="flex justify-between items-center text-[20px] font-bold">
@@ -160,4 +160,4 @@ const Card = ({ tasks, onTasksUpdate }) => {
     );
 }
 
-export default Card;
+export default Header;

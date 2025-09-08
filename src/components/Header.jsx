@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 
-// Recebe as funções 'onSearch' e 'onToggleTheme' do componente App
-const Header = ({ onSearch, onToggleTheme }) => {
+// Recebe as funções 'onSearch' e 'setDarkMode' do componente App
+const Header = ({ onSearch, setDarkMode }) => {
   const [isMobileSearchVisible, setIsMobileSearchVisible] = useState(false);
   const searchInputRef = useRef(null);
 
@@ -55,11 +55,17 @@ const Header = ({ onSearch, onToggleTheme }) => {
         )}
         
         {/* Ícones de tema que chamam a função do App */}
-        <box-icon type='solid' name='moon' class="duration-150 dark:hidden cursor-pointer" onClick={onToggleTheme}></box-icon>
-        <box-icon type='solid' name='sun' class="fill-slate-400 duration-150 hidden dark:block cursor-pointer" onClick={onToggleTheme}></box-icon>
+        <box-icon type='solid' name='moon' class="duration-150 dark:hidden cursor-pointer" onClick={() => setDarkMode(true)}></box-icon>
+        <box-icon type='solid' name='sun' class="fill-slate-400 duration-150 hidden dark:block cursor-pointer" onClick={() => setDarkMode(false)}></box-icon>
       </div>
     </header>
   );
 }
 
 export default Header;
+
+// filepath: c:\Users\construtora\Documents\projeto-tarefas-react\tailwind.config.js
+module.exports = {
+  darkMode: 'class',
+  // ...outros configs...
+}
