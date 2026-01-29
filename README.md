@@ -2,6 +2,9 @@
 
 Gerenciador de tarefas moderno desenvolvido em **React**, focado em performance e experiência de usuário (UX). O projeto utiliza um **back-end simulado** (JSON Server) para realizar operações de CRUD completas (Criar, Ler, Atualizar e Deletar).
 
+## 📸 Demonstração
+![Image](https://github.com/user-attachments/assets/23c54fdd-04d6-4eab-84ae-827580847ae2)
+
 ## 🚀 Tecnologias Utilizadas
 
 * **React** (Vite)
@@ -21,9 +24,6 @@ Gerenciador de tarefas moderno desenvolvido em **React**, focado em performance 
 * [x] **Dark Mode:** Alternância de tema (Claro/Escuro) com persistência visual.
 * [x] **Componente Gaveta (Drawer):** Formulários de cadastro e edição deslizam da lateral com animação suave, em vez de modais intrusivos.
 * [x] **Responsividade:** Layout adaptável para Mobile e Desktop (Grid system).
-
-## 📸 Demonstração
-
 
 ## 🛠️ Como rodar o projeto
 
